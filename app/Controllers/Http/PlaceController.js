@@ -38,7 +38,13 @@ class PlaceController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, auth}) {
+    const data = request.only(['name', 'address', 'city',
+     'thumbnail_path', 'logo_path', 'latitude', 'longitude'])
+  
+    const place = await Place.create({owner_id: auth.user.id , ...data})
+
+    return place
   }
 
   /**

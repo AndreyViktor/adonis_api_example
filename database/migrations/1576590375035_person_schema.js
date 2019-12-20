@@ -14,9 +14,11 @@ class PersonSchema extends Schema {
           .inTable('users')
           .onUpdate('CASCADE')
           .onDelete('CASCADE')
+          .unique()
+          
       table.string('name').notNullable()
-      table.string('last_name').notNullable()
-      table.string('document').notNullable()
+      table.string('last_name')
+      table.string('document')
       table.string('address')
       table.string('city')
       table.string('profile_pic_path')

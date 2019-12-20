@@ -7,7 +7,7 @@ class ProductCategorySchema extends Schema {
   up () {
     this.create('product_categories', (table) => {
       table.increments()
-      table.string('category')
+      table.string('category').notNullable()
       table.timestamps()
     })
   }

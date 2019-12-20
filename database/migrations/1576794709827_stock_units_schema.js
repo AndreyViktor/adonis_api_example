@@ -3,7 +3,7 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class StockUnitSchema extends Schema {
+class StockUnitsSchema extends Schema {
   up () {
     this.create('stock_units', (table) => {
       table.increments()
@@ -12,7 +12,7 @@ class StockUnitSchema extends Schema {
         .integer('product_id')
         .unsigned()
         .references('id')
-        .inTable('product')
+        .inTable('products')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
 
@@ -20,16 +20,18 @@ class StockUnitSchema extends Schema {
         .integer('place_id')
         .unsigned()
         .references('id')
-        .inTable('place')
+        .inTable('places')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
+        .notNullable()
 
-      table.string('private_name').notNullable()
-      table.string('private_description').notNullable()
-      table.string('private_pic_path').notNullable()
+      table.string('private_name')
+      table.string('private_description')
+      table.string('private_pic_path')
       table.integer('price')
       table.boolean('available')
       table.boolean('selloff')
+
       table.timestamps()
     })
   }
@@ -39,4 +41,4 @@ class StockUnitSchema extends Schema {
   }
 }
 
-module.exports = StockUnitSchema
+module.exports = StockUnitsSchema

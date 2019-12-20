@@ -22,7 +22,7 @@ class PersonController {
    */
   async store ({ request, auth}) {
     const data = request.only(['name', 'last_name', 'document'])
-    
+  
     const person = await Person.create({user_id: auth.user.id , ...data})
 
     return person
@@ -37,7 +37,7 @@ class PersonController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params}) {
+  async show ({ params, auth}) {
     const person = await Person.findOrFail(params.id)
 
     if (person.user_id !== auth.user.id) {
