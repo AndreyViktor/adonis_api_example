@@ -36,6 +36,10 @@ Route.resource('/stock', 'StockUnitController')
 .apiOnly()
 .middleware('auth')
 
-Route.resource('/product', 'PorductController')
+Route.resource('/product', 'ProductController')
+.apiOnly()
+.middleware('auth')
+
+Route.resource('/productcategory', 'ProductCategoryController')
 .apiOnly()
 .middleware('auth')

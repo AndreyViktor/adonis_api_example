@@ -29,7 +29,24 @@ class StockUnitController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
+  async create ({ request, auth }) {
+    const data = request.only(['product_id',
+                               'place_id',
+                               'private_name',
+                               'private_description',
+                               'private_pic_path',
+                               'private_unit',
+                               'price',
+                               'available',
+                               'selloff'])
+
+    if (ownder_id !== auth.user.id) {
+      return response.status(401).send({ error: 'Not authorized' })
+    }
+                            
+    const person = await Person.create({user_id: auth.user.id , ...data})
+
+    return person
   }
 
   /**

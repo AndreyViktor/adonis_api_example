@@ -20,10 +20,10 @@ class PlaceController {
    * @param {View} ctx.view
    */
   async index ({ request }) {
-    const {latitude, longitude} = request.all()
+    const {latitude, longitude, distance} = request.all()
 
     const places = Place.query()
-                    .PlacesNearBy(latitude, longitude, 20)
+                    .PlacesNearBy(latitude, longitude, distance)
                     .fetch()
 
     return places
@@ -72,6 +72,22 @@ class PlaceController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const place = await Place.findOrFail(params.id)
+
+    const data = request.only([
+      'name',
+      'address',
+      'city',
+      'thumbnail_path',
+      'logo_path',
+      'latitude',
+      'longitude'])
+  
+    place.merge(data)
+  
+    await place.save()
+  
+    return place
   }
 
   /**

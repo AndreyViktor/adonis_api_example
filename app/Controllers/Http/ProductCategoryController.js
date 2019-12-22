@@ -1,5 +1,7 @@
 'use strict'
 
+const Category = use('App/Models/ProductCategory')
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,6 +20,9 @@ class ProductCategoryController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    const categories = Category.all()
+
+    return categories
   }
 
 
@@ -29,7 +34,12 @@ class ProductCategoryController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request }) {
+    const data = request.only(['category'])
+  
+    const category = await Category.create({ ...data})
+
+    return category
   }
 
   /**
