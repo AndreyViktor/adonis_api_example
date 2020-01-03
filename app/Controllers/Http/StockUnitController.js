@@ -1,5 +1,9 @@
 'use strict'
 
+const Place = use('App/Models/Place')
+const StockUnit = use('App/Models/StockUnit')
+
+
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -20,34 +24,6 @@ class StockUnitController {
   async index ({ request, response, view }) {
   }
 
-  /**
-   * Render a form to be used for creating a new stockunit.
-   * GET stockunits/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, auth }) {
-    const data = request.only(['product_id',
-                               'place_id',
-                               'private_name',
-                               'private_description',
-                               'private_pic_path',
-                               'private_unit',
-                               'price',
-                               'available',
-                               'selloff'])
-
-    if (ownder_id !== auth.user.id) {
-      return response.status(401).send({ error: 'Not authorized' })
-    }
-                            
-    const person = await Person.create({user_id: auth.user.id , ...data})
-
-    return person
-  }
 
   /**
    * Create/save a new stockunit.
@@ -57,7 +33,26 @@ class StockUnitController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, auth }) {
+    const data = request.only(['product_id',
+    'place_id',
+    'private_name',
+    'private_description',
+    'private_pic_path',
+    'private_unit',
+    'price',
+    'available',
+    'selloff'])
+
+    const {owner_id} = await Place.findOrFail(data.place_id)
+
+    if (owner_id !== auth.user.id) {
+      return response.status(401).send({ error: 'Not authorized' })
+    }
+    
+    const stockunit = await StockUnit.create({...data})
+
+    return stockunit
   }
 
   /**
@@ -72,17 +67,7 @@ class StockUnitController {
   async show ({ params, request, response, view }) {
   }
 
-  /**
-   * Render a form to update an existing stockunit.
-   * GET stockunits/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
+  
 
   /**
    * Update stockunit details.

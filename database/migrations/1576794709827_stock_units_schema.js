@@ -28,7 +28,7 @@ class StockUnitsSchema extends Schema {
       table.string('private_name')
       table.string('private_description')
       table.string('private_pic_path')
-      tables.string('private_unit')
+      table.string('private_unit')
       table.integer('price')
       table.boolean('available')
       table.boolean('selloff')

@@ -59,16 +59,6 @@ class PersonController {
   async update ({ params, request, response }) {
   }
 
-  /**
-   * Delete a person with id.
-   * DELETE people/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, response }) {
-  }
 }
 
 module.exports = PersonController
