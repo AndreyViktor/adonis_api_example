@@ -26,6 +26,10 @@ class Place extends Model {
     stock(){
         return this.hasMany('App/Models/StockUnit')
     }
+
+    purchase(){
+      return this.hasMany('App/Models/Purchase')
+    }
 }
 
 module.exports = Place

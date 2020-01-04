@@ -21,7 +21,12 @@ class StockUnitController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ request }) {
+    const place_id = request.only('place_id')
+
+    const stock = await StockUnit.query().where(place_id).fetch()
+
+    return stock
   }
 
 
