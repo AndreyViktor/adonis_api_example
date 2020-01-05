@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Purchase extends Model {
+    transaction(){
+        this.belongsToMany('app/Models/Transaction')
+    }
 }
 
 module.exports = Purchase
