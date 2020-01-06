@@ -20,17 +20,7 @@ class PurchaseController {
   async index ({ request, response, view }) {
   }
 
-  /**
-   * Render a form to be used for creating a new purchase.
-   * GET purchases/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
+
 
   /**
    * Create/save a new purchase.
@@ -40,7 +30,14 @@ class PurchaseController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, params }) {
+    const purchase = request.body.purchase
+    
+    const place_id = params.id
+
+    purchase.place_id = place_id
+
+    return purchase
   }
 
   /**
@@ -53,18 +50,6 @@ class PurchaseController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing purchase.
-   * GET purchases/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
   }
 
   /**

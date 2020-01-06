@@ -28,6 +28,10 @@ Route.resource('/places', 'PlaceController')
   .apiOnly()
   .middleware('auth')
 
+Route.resource('/places/:id/purchase', 'PurchaseController')
+  .apiOnly()
+  .middleware('auth')  
+
 Route.resource('/person', 'PersonController')
 .apiOnly()
 .middleware('auth')
