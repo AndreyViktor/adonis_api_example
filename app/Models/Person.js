@@ -11,6 +11,10 @@ class Person extends Model {
     purchase(){
         return this.hasMany('App/Models/Purchase')
     }
+
+    favorties(){
+        return this.hasMany('App/Models/Favorite')
+    }
 }
 
 module.exports = Person

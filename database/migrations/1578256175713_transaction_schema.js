@@ -12,7 +12,7 @@ class TransactionSchema extends Schema {
       .integer('purchase_id')
       .unsigned()
       .references('id')
-      .inTable('purchase')
+      .inTable('purchases')
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
       .notNullable()
